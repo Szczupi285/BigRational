@@ -1,4 +1,6 @@
-﻿using System.Numerics;
+﻿using System.Data;
+using System.Data.Common;
+using System.Numerics;
 using System.Reflection.Metadata.Ecma335;
 using System.Xml;
 
@@ -60,10 +62,41 @@ namespace RationalLib
         public BigRational() : this(0, 1) { }
 
         public BigRational(string s) : this(Parse(s).Numerator, Parse(s).Denominator) { }
-        
-         
 
         
+        public BigRational(decimal s)
+        {
+
+            string temp = s.ToString().Substring(s.ToString().IndexOf(",") + 1);
+            int digAfterDecimalPoint = temp.Length;
+
+            BigInteger den = new BigInteger(Math.Pow(10, digAfterDecimalPoint));
+            BigInteger num;
+            BigInteger befDecPoint = new BigInteger(s);
+            BigInteger AftDecPoint = BigInteger.Parse(temp);
+            if (s < 0)
+            {
+                num = BigInteger.Negate(befDecPoint * Denominator + AftDecPoint);
+
+            }
+            else
+                num = befDecPoint * Denominator + AftDecPoint;
+
+
+            BigRational TempObj = new BigRational(num, den);
+            Numerator = TempObj.Numerator;
+            Denominator = TempObj.Denominator;
+
+
+        }
+
+        public BigRational(double s) : this((decimal)s) { }
+       
+
+
+
+
+
 
         #endregion
 
@@ -121,15 +154,18 @@ namespace RationalLib
         #region NotImplementedException
         public decimal ToDecimal()
         {
-            throw new NotImplementedException();
+            return (decimal)this.Numerator / (decimal)this.Denominator;
+           
         }
         public double ToDouble()
         {
-            throw new NotImplementedException();
+            return (double)this.Numerator / (double)this.Denominator;
+
         }
-        public Single ToSingle()
+        public Single ToSingle(BigRational input)
         {
-            throw new NotImplementedException();
+            return (float)this.Numerator / (float)this.Denominator;
+
         }
         #endregion
     }
