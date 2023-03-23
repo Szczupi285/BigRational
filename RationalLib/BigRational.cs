@@ -7,7 +7,7 @@ using System.Xml;
 namespace RationalLib
 {
     
-    public readonly struct BigRational
+    public readonly struct BigRational : IEquatable<BigRational>
     {
 
         
@@ -103,22 +103,22 @@ namespace RationalLib
         public override string ToString()
         {
 
-            if (IsNaN(this)) return "NaN";
-            else if (IsPositiveInfinity(this)) return "+∞";
-            else if (IsNegativeInfinity(this)) return "-∞";
+            if (this.IsNaN()) return "NaN";
+            else if (this.IsPositiveInfinity()) return "+∞";
+            else if (this.IsNegativeInfinity()) return "-∞";
             else return $"{Numerator}/{Denominator}";
         }
 
         #region exceptional cases methods
-        bool IsNaN(BigRational obj) => obj.Numerator == 0 && obj.Denominator == 0;
+        bool IsNaN() => this.Numerator == 0 && this.Denominator == 0;
 
-        bool IsInfinity(BigRational obj) => obj.Numerator != 0 && obj.Denominator == 0;
+        bool IsInfinity() => this.Numerator != 0 && this.Denominator == 0;
 
-        bool IsNegativeInfinity(BigRational obj) => obj.Numerator < 0 && obj.Denominator == 0;
+        bool IsNegativeInfinity() => this.Numerator < 0 && this.Denominator == 0;
 
-        bool IsPositiveInfinity(BigRational obj) => obj.Numerator > 0 && obj.Denominator == 0;
+        bool IsPositiveInfinity() => this.Numerator > 0 && this.Denominator == 0;
 
-        bool isFinite(BigRational obj) => obj.Denominator != 0;
+        bool isFinite() => this.Denominator != 0;
 
         #endregion
 
@@ -133,17 +133,19 @@ namespace RationalLib
             return new BigRational(BigInteger.Parse(Array[0]), BigInteger.Parse(Array[1]));
 
         }
-        public bool TryParse(string? s, out BigRational result)
+        public static bool TryParse(string? s, out BigRational result)
         {
             if (String.IsNullOrEmpty(s))
                 throw new ArgumentNullException("value is null");
             result = BigRational.Zero;
             var Array = s.Split("/");
+            
             if (Array.Length != 2)
                 return false;
-            else if (Array[0] == "0" && Array[1] == "0")
+            else if ((Array[0] == "0" && Array[1] == "0") || (Array[0] == "-0" && Array[1] == "0") 
+                || (Array[0] == "0" && Array[1] == "-0") || (Array[0] == "-0" && Array[1] == "-0")) 
                 return false;
-            else if (Array[0].All(char.IsNumber) == false || Array[1].All(char.IsNumber) == false)
+            else if (BigInteger.TryParse(Array[0], out _) == false || BigInteger.TryParse(Array[1], out _) == false)
                 return false;
             else
             {
@@ -151,22 +153,62 @@ namespace RationalLib
                 return true;
             }
         }
-        #region NotImplementedException
+
+        public static explicit operator int(BigRational input)
+        {
+            
+            if (input == BigRational.NaN)
+               throw new ArgumentException("NaN is not a number");
+            return Convert.ToInt32((int)input.Numerator / (int)input.Denominator);
+        }
         public decimal ToDecimal()
         {
+            if (this == BigRational.NaN)
+                throw new ArgumentException("NaN is not a number");
             return (decimal)this.Numerator / (decimal)this.Denominator;
            
         }
         public double ToDouble()
         {
+            if (this == BigRational.NaN)
+                throw new ArgumentException("NaN is not a number");
             return (double)this.Numerator / (double)this.Denominator;
 
         }
-        public Single ToSingle(BigRational input)
+        public float ToSingle()
         {
+            if (this == BigRational.NaN)
+                throw new ArgumentException("NaN is not a number");
             return (float)this.Numerator / (float)this.Denominator;
 
         }
+
+        #region IEquatable<BigRational>
+        public override bool Equals(object? obj)
+        {
+            return obj is BigRational && Equals((BigRational)obj);
+        }
+        public bool Equals(BigRational other)
+        {
+            if (this.IsNaN() || other.IsNaN()) return false;
+            
+            if (this.Numerator == other.Numerator && this.Denominator == other.Denominator) return true;
+            return false;
+        }
+        public static bool Equals(BigRational obj1, BigRational obj2)
+        {
+            if (obj1.IsNaN() || obj2.IsNaN()) return false;
+            if (obj1.Numerator == obj2.Numerator && obj1.Denominator == obj2.Denominator) return true;
+            return false;
+        }
+        public override int GetHashCode()
+        {
+            return this.GetHashCode();
+        }
+        public static bool operator ==(BigRational obj1, BigRational obj2) => obj1.Equals(obj2);
+        public static bool operator !=(BigRational obj1, BigRational obj2) => !obj1.Equals(obj2);
+
+        
         #endregion
     }
 
