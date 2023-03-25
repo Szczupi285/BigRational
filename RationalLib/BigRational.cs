@@ -7,7 +7,7 @@ using System.Xml;
 namespace RationalLib
 {
     
-    public readonly struct BigRational : IEquatable<BigRational>
+    public readonly partial struct BigRational : IEquatable<BigRational>
     {
 
         
@@ -92,12 +92,6 @@ namespace RationalLib
 
         public BigRational(double s) : this((decimal)s) { }
        
-
-
-
-
-
-
         #endregion
 
         public override string ToString()
@@ -122,66 +116,6 @@ namespace RationalLib
 
         #endregion
 
-
-        public static BigRational Parse(string s)
-        {
-           
-            var Array = s.Split("/");
-            if (Array.Length != 2)
-                throw new FormatException("wrong format");
-
-            return new BigRational(BigInteger.Parse(Array[0]), BigInteger.Parse(Array[1]));
-
-        }
-        public static bool TryParse(string? s, out BigRational result)
-        {
-            if (String.IsNullOrEmpty(s))
-                throw new ArgumentNullException("value is null");
-            result = BigRational.Zero;
-            var Array = s.Split("/");
-            
-            if (Array.Length != 2)
-                return false;
-            else if ((Array[0] == "0" && Array[1] == "0") || (Array[0] == "-0" && Array[1] == "0") 
-                || (Array[0] == "0" && Array[1] == "-0") || (Array[0] == "-0" && Array[1] == "-0")) 
-                return false;
-            else if (BigInteger.TryParse(Array[0], out _) == false || BigInteger.TryParse(Array[1], out _) == false)
-                return false;
-            else
-            {
-                result = new BigRational(BigInteger.Parse(Array[0]), BigInteger.Parse(Array[1]));
-                return true;
-            }
-        }
-
-        public static explicit operator int(BigRational input)
-        {
-            
-            if (input == BigRational.NaN)
-               throw new ArgumentException("NaN is not a number");
-            return Convert.ToInt32((int)input.Numerator / (int)input.Denominator);
-        }
-        public decimal ToDecimal()
-        {
-            if (this == BigRational.NaN)
-                throw new ArgumentException("NaN is not a number");
-            return (decimal)this.Numerator / (decimal)this.Denominator;
-           
-        }
-        public double ToDouble()
-        {
-            if (this == BigRational.NaN)
-                throw new ArgumentException("NaN is not a number");
-            return (double)this.Numerator / (double)this.Denominator;
-
-        }
-        public float ToSingle()
-        {
-            if (this == BigRational.NaN)
-                throw new ArgumentException("NaN is not a number");
-            return (float)this.Numerator / (float)this.Denominator;
-
-        }
 
         #region IEquatable<BigRational>
         public override bool Equals(object? obj)
