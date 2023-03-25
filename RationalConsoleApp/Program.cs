@@ -21,3 +21,4 @@ Console.WriteLine(x);
 Console.WriteLine(x1);
 Console.WriteLine(y);
 Console.WriteLine((int)y);
+Console.WriteLine(2.0/0 == 3.0/0);

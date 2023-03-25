@@ -190,17 +190,16 @@ namespace RationalLib
         }
         public bool Equals(BigRational other)
         {
+             
             if (this.IsNaN() || other.IsNaN()) return false;
-            
+            if(this.IsPositiveInfinity() && other.IsPositiveInfinity()) return true;
+            if (this.IsNegativeInfinity() && other.IsNegativeInfinity()) return true;
+
             if (this.Numerator == other.Numerator && this.Denominator == other.Denominator) return true;
             return false;
         }
-        public static bool Equals(BigRational obj1, BigRational obj2)
-        {
-            if (obj1.IsNaN() || obj2.IsNaN()) return false;
-            if (obj1.Numerator == obj2.Numerator && obj1.Denominator == obj2.Denominator) return true;
-            return false;
-        }
+        public static bool Equals(BigRational obj1, BigRational obj2) => obj1.Equals(obj2);
+        
         public override int GetHashCode()
         {
             return this.GetHashCode();

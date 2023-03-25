@@ -115,6 +115,8 @@ namespace RationalUnitTests
         [DataRow(1, -1, -1, 1)]
         [DataRow(2, 8, 1, 4)]
         [DataRow(0, 4, 0, 1)]
+        [DataRow(1, 0, 3, 0)]
+        [DataRow(-1, 0, -3, 0)]
         public void Equals_True(int numerator, int denumerator, int secondNumerator, int secondDenumerator)
         {
             var obj1 = new BigRational(numerator, denumerator);
@@ -129,7 +131,7 @@ namespace RationalUnitTests
         [DataRow(1, -1, -1, 4)]
         [DataRow(2, 8, 1, 3)]
         [DataRow(0, 4, 1, 4)]
-        [DataRow(0, 0, 0, 0)]
+        [DataRow(1, 0, -1, 0)]
         public void Equals_False(int numerator, int denumerator, int secondNumerator, int secondDenumerator)
         {
             var obj1 = new BigRational(numerator, denumerator);
@@ -144,6 +146,8 @@ namespace RationalUnitTests
         [DataRow(1, -1, -1, 1)]
         [DataRow(2, 8, 1, 4)]
         [DataRow(0, 4, 0, 1)]
+        [DataRow(1, 0, 3, 0)]
+        [DataRow(-1, 0, -3, 0)]
         public void Static_Equals_True(int numerator, int denumerator, int secondNumerator, int secondDenumerator)
         {
             var obj1 = new BigRational(numerator, denumerator);
@@ -158,7 +162,7 @@ namespace RationalUnitTests
         [DataRow(1, -1, -1, 4)]
         [DataRow(2, 8, 1, 3)]
         [DataRow(0, 4, 1, 4)]
-        [DataRow(0, 0, 0, 0)]
+        [DataRow(1, 0, -1, 0)]
         public void Static_Equals_False(int numerator, int denumerator, int secondNumerator, int secondDenumerator)
         {
             var obj1 = new BigRational(numerator, denumerator);
