@@ -15,6 +15,8 @@ namespace RationalLib
         public readonly static BigRational Zero = new BigRational(0, 1);
         public readonly static BigRational One = new BigRational(1, 1);
         public readonly static BigRational Half = new BigRational(1, 2);
+        public readonly static BigRational PositiveInfinity = new BigRational(1, 0);
+        public readonly static BigRational NegativeInfinity = new BigRational(-1, 0);
 
 
         // properties

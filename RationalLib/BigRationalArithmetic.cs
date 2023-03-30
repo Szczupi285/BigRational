@@ -166,9 +166,16 @@ namespace RationalLib
         } 
 
        public static BigRational Floor(BigRational u1) => new BigRational(BigInteger.Divide(u1.Numerator, u1.Denominator), 1);
-       public static BigRational Ceiling(BigRational u1) => new BigRational(BigInteger.Divide(u1.Numerator, u1.Denominator) + 1, 1);
+        public static BigRational Ceiling(BigRational u1)
+        {
+            if(u1.Denominator != 1) 
+                return new BigRational(BigInteger.Divide(u1.Numerator, u1.Denominator) + 1, 1);
+            else
+                return new BigRational(BigInteger.Divide(u1.Numerator, u1.Denominator), 1);
 
-       public static BigRational Max(BigRational u1, BigRational u2)
+        }
+
+        public static BigRational Max(BigRational u1, BigRational u2)
        {
             if (u1.Numerator * u2.Denominator > u1.Denominator * u2.Numerator)
                 return u1;
@@ -197,6 +204,8 @@ namespace RationalLib
                 
             return x;
        }
+        public static BigRational Avg(params BigRational[] input) => BigRational.Sum(input) / input.Length;
+        
 
         #endregion
     }

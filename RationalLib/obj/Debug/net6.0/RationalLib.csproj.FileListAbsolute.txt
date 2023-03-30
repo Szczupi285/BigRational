@@ -10,3 +10,15 @@ E:\repository\BigRational\RationalLib\obj\Debug\net6.0\RationalLib.dll
 E:\repository\BigRational\RationalLib\obj\Debug\net6.0\refint\RationalLib.dll
 E:\repository\BigRational\RationalLib\obj\Debug\net6.0\RationalLib.pdb
 E:\repository\BigRational\RationalLib\obj\Debug\net6.0\ref\RationalLib.dll
+E:\repository\BigRational\BigRational\RationalLib\bin\Debug\net6.0\RationalLib.deps.json
+E:\repository\BigRational\BigRational\RationalLib\bin\Debug\net6.0\RationalLib.dll
+E:\repository\BigRational\BigRational\RationalLib\bin\Debug\net6.0\RationalLib.pdb
+E:\repository\BigRational\BigRational\RationalLib\obj\Debug\net6.0\RationalLib.csproj.AssemblyReference.cache
+E:\repository\BigRational\BigRational\RationalLib\obj\Debug\net6.0\RationalLib.GeneratedMSBuildEditorConfig.editorconfig
+E:\repository\BigRational\BigRational\RationalLib\obj\Debug\net6.0\RationalLib.AssemblyInfoInputs.cache
+E:\repository\BigRational\BigRational\RationalLib\obj\Debug\net6.0\RationalLib.AssemblyInfo.cs
+E:\repository\BigRational\BigRational\RationalLib\obj\Debug\net6.0\RationalLib.csproj.CoreCompileInputs.cache
+E:\repository\BigRational\BigRational\RationalLib\obj\Debug\net6.0\RationalLib.dll
+E:\repository\BigRational\BigRational\RationalLib\obj\Debug\net6.0\refint\RationalLib.dll
+E:\repository\BigRational\BigRational\RationalLib\obj\Debug\net6.0\RationalLib.pdb
+E:\repository\BigRational\BigRational\RationalLib\obj\Debug\net6.0\ref\RationalLib.dll

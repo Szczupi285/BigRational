@@ -6,7 +6,12 @@ namespace RationalUnitTests
     [TestClass]
     public class BigRationalConversionsUnitTests
     {
-
+        [DataTestMethod]
+        [DataRow("-1/2", -1, 2)]
+        [DataRow("-5/15", -1, 3)]
+        [DataRow("1/-1", -1, 1)]
+        [DataRow("2/8", 1, 4)]
+        [DataRow("0/4", 0, 1)]
         public void Parse(string input, int exectedNumerator, int expectedDenumerator)
         {
             var obj = BigRational.Parse(input);
@@ -41,8 +46,8 @@ namespace RationalUnitTests
 
         public void TryParse_False(string input)
         {
-            BigRational result;
-            var IsSuccesful = BigRational.TryParse(input, out result);
+            
+            var IsSuccesful = BigRational.TryParse(input, out _);
             Assert.IsFalse(IsSuccesful);
 
         }

@@ -5,27 +5,12 @@ namespace Application
     {
         static void Main(string[] args)
         {
-            var p1 = new BigRational(-2, 4);
-            var p2 = new BigRational(0, 0);
-
+            var p1 = new BigRational(2, 3);
+            var p2 = new BigRational(4, 5);
+            var p3 = new BigRational(8, 6);
+            Console.WriteLine(new BigRational(-12, 90)); 
+            Console.WriteLine(BigRational.Avg(p1,p2,p3));
             
-            Console.WriteLine(p1.CompareTo(p2));
-            Console.WriteLine(p1 < p2);
-            Console.WriteLine(p1 > p2);
-            Console.WriteLine(p1 <= p2);
-            Console.WriteLine(p1 >= p2);
-            Console.WriteLine(-1.0/0.0 > 1000000000000.0);
-           
-            Console.WriteLine();
-            
-            byte s = 5;
-            BigRational p4 = s;
-            double f = s;
-            Console.WriteLine(p1);
-            decimal temp = (decimal)p1;
-
-            Console.WriteLine(temp);
-
            
         }
     }
